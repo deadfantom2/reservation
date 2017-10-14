@@ -1,0 +1,54 @@
+1)npm init
+2)npm install --save express
+3)npm install --save pug
+4)npm install -g nodemon
+5)npm install --save express-messages express-session connect-flash express-validator
+6)npm install --save passport passport-local bcryptjs
+7)npm install --save mongoose
+8)npm install --save body-parser   //pour parser la BD
+9)npm install --save express-session
+10)npm install --save passport
+11)npm install --save passport-local
+12)npm install connect-mongo --save
+
+
+
+//Start Mongo Db
+ - mongod --dbpath D:\data\db
+
+//Install RoboMongo.exe
+
+//Bower install
+ - Create in racine .bowerrc
+ - npm install -g bower
+ - bower install bootstrap
+
+
+
+/**********************************************BD**********************************************************************/
+
+ - Reservation
+ - Appartements
+
+
+/*
+echo "# reservation" >> README.md
+git init
+git add README.md
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/deadfantom2/reservation.git
+git push -u origin master
+
+git push -f origin master
+*/
+
+/*
+git add .
+git commit -m "first commit"
+git push -u origin master
+*/
+*
+
+
+hello@clementsauvage.me

@@ -28,7 +28,9 @@ html
                   a(href='/chambres/add') Add chambre
           ul.nav.navbar-nav.navbar-right
             if user
-              li 
+              li
+                a(href='/users/profile/'+ user._id) Profile
+              li
                 a(href='/users/logout') Log out
             else
               li

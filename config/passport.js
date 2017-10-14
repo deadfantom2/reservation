@@ -12,7 +12,7 @@ module.exports = function(passport){
     User.findOne(query, function(err, user){
       if(err) throw err;
       if(!user){
-        return done(null, false, {message: "Utilisateur n'exista pas"});
+        return done(null, false, {message: "Utilisateur n'existe pas"});
       }
 
       // Match Password

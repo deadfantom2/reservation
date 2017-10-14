@@ -90,16 +90,6 @@ Article.find({}, function(err, articles){
 });
 
 
-// Home pages pour les chambres
-app.get('/chambres', function(req,resp){
-Chambre.find({}, function(err, chambres){
-  if(err){
-    console.log(err);
-  }else{
-    resp.render('./chambre/chambres',{title:'Chambres', chambres:chambres});
-  }
-});
-});
 /*----------------------------------------------------------------------------*/
 
 

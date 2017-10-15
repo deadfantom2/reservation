@@ -1,19 +1,21 @@
 var express = require('express');
+var nodemailer  = require('nodemailer');
 var router = express.Router();
 
-// Declaration des Modeles
+// Models
 var Reservation = require('../models/reservation');  //Categorie
-var User = require('../models/user');        //User
+var User        = require('../models/user');        //User
 
 
 
-// Routes basic reservations
-router.get('/', ensureAuthenticated,  function(req,resp){
-    Reservation.find({}, function(err, reservations){
+// Route basic de toutes mes reservations
+router.get('/', ensureAuthenticated,  function(req,resp){  // ensureAuthenticated, si connecter ou pas
+    Reservation.find({}, function(err, reservations){       // trouver totues mes reservations
         if(err){
             console.log(err);
         }else{
-            resp.render('./reservation/reservations',{title:'Reservations', reservations:reservations});
+            // envoit dans la vue les reservations
+            resp.render('./reservation/reservations',{title:'Liste de mes réservations : ', reservations:reservations});
         }
     });
 });
@@ -27,6 +29,7 @@ router.get('/add', ensureAuthenticated, function(req,resp){
 });
 // Method POST  Create
 router.post('/add', ensureAuthenticated,  function(req,resp){
+  // Si required n'est pas respecter afficher les messages
   req.checkBody('etage','Etage is required').notEmpty();
   req.checkBody('type','Type is required').notEmpty();
   req.checkBody('nbRoom','Nombre Room is required').notEmpty();
@@ -37,6 +40,7 @@ router.post('/add', ensureAuthenticated,  function(req,resp){
   if(errors){
     resp.render('./reservation/add_reservation',{title:'Add Reservation',errors:errors})
   }else{
+      //création nouveau reservation
       var reservation = new Reservation();
           reservation.etage = req.body.etage;
           reservation.type = req.body.type;
@@ -45,9 +49,8 @@ router.post('/add', ensureAuthenticated,  function(req,resp){
           reservation.userId = req.user._id;
           reservation.save();
 
-
-          req.flash('success','Reservation Added');
-          resp.redirect('/reservations');
+          req.flash('success','Reservation Added');  // message success
+          resp.redirect('/reservations');            // rederictions vers /reservations
   }
 });
 
@@ -55,6 +58,7 @@ router.post('/add', ensureAuthenticated,  function(req,resp){
 /*------------------------------------------------------Read----------------------------------------------------------*/
 // Method GET  Read
 router.get('/:id', ensureAuthenticated,  function(req,resp){
+    //Trouver une reservations selon   son id
     Reservation.findById(req.params.id, function(err, reservation){
       resp.render('./reservation/reservation',{reservation:reservation});
   });
@@ -65,6 +69,7 @@ router.get('/:id', ensureAuthenticated,  function(req,resp){
 // Method GET  Edit
 router.get('/edit/:id', ensureAuthenticated, function(req,resp){
     Reservation.findById(req.params.id, function(err, reservation){
+        // pour securiser les routes des autres utilsiateurs
         if(reservation.userId != req.user._id){
             req.flash('danger', 'Not Authorized');
             resp.redirect('/');
@@ -83,6 +88,10 @@ router.post('/edit/:id', ensureAuthenticated, function(req,resp){
 
         var query = {_id:req.params.id}
 
+    if(reservation.userId != req.user._id){
+        req.flash('danger', 'Not Authorized');
+        resp.redirect('/');
+    }else
     Reservation.update(query, reservation, function(err){
         if(err){
             console.log(err);
@@ -120,10 +129,12 @@ router.delete('/:id', ensureAuthenticated, function(req,resp){
 
 /*-----------------------------------------------Access control-------------------------------------------------------*/
 function ensureAuthenticated(req, resp, next){
+    //si on est connecter
     if(req.isAuthenticated()){
         return next();
     }else{
-        req.flash('danger', 'Please login');
+        //si non rederiction vers la page login
+        req.flash('danger', 'Veuillez vous connecter');
         resp.redirect('/users/login');
     }
 }

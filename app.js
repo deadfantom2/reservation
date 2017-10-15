@@ -15,7 +15,6 @@ var MongoStore = require('connect-mongo')(session);
 var app = express();
 
 // Declaration Models
-var Article = require('./models/article');
 var Reservation = require('./models/reservation');
 
 // Pour charger toutes les 'vues.pug' dans le dossier 'views'
@@ -80,11 +79,11 @@ app.get('*', function(req, res, next){
 /*----------------------------------------------------------------------------*/
 // Home Route Shows Ever Articles
 app.get('/', function(req,resp){
-Article.find({}, function(err, articles){
+Reservation.find({}, function(err, reservations){
   if(err){
     console.log(err);
   }else{
-    resp.render('index',{title:'Articles', articles:articles});
+    resp.render('index',{title:'reservations', reservations:reservations});
   }
 });
 });
@@ -95,7 +94,6 @@ Article.find({}, function(err, articles){
 
 /*------------Declaration Routes Avec Path definit une fois-------------------*/
 app.use('/users', require('./routes/users'));
-app.use('/articles', require('./routes/articles'));
 app.use('/reservations', require('./routes/reservation'));
 
 

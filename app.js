@@ -17,6 +17,7 @@ var app = express();
 
 // Declaration Models
 var Reservation = require('./models/reservation');
+var User = require('./models/user');
 
 // Pour charger toutes les 'vues.pug' dans le dossier 'views'
 app.set('views',path.join(__dirname, 'views'));
@@ -80,13 +81,15 @@ app.get('*', function(req, res, next){
 /*----------------------------------------------------------------------------*/
 // Home Route Shows Ever Articles
 app.get('/', function(req,resp){
-Reservation.find({}, function(err, reservations){
-  if(err){
-    console.log(err);
-  }else{
-    resp.render('index',{title:'reservations', reservations:reservations});
-  }
-});
+    Reservation.find({}, function(err, reservations){
+        User.find({}, function (err, users) {
+            if(err){
+                console.log(err);
+            }else{
+                resp.render('index',{title:'Listes des réservations', reservations:reservations, users:users});
+            }
+        });
+    });
 });
 
 

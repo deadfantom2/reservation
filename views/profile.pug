@@ -2,8 +2,8 @@ extends layout
 block content
 
 
-    h1 #{title}
-    p sdfsdfdsf
+    h1 #{title} #{user.name}
+
     form(method='POST',action='/users/profile/' + user._id)
         #form-group
             label Name:

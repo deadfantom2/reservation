@@ -1,0 +1,32 @@
+extends ../layout
+block content
+
+  h1 #{title}
+  form(method='POST',action='/reservations/edit/' + reservation._id)
+    #form-group
+      label Etage:
+      input.form-control(name='etage',type='text', value=reservation.etage)
+    br
+    #form-group
+      label Type:
+      select(name='type')
+        if reservation.type == 'Familiale'
+          option(value=reservation.type, selected='')= reservation.type
+          option(value='Luxe') Luxe
+        else if reservation.type == 'Luxe'
+          option(value=reservation.type, selected='')= reservation.type
+          option(value='Familiale') Familiale
+    br
+    #form-group
+      label Nombre room:
+      input.form-control(name='nbRoom',type='text', value=reservation.nbRoom)
+    br
+    #form-group
+      label Nombre room:
+      input.form-control(name='dateReservation',type='date', value=reservation.dateReservation)
+    br
+    #form-group
+      input.form-control(name='userId',type='hidden', value=reservation.userId)
+    br
+    input.btn.btn-primary(type='submit',value='Edit')
+          

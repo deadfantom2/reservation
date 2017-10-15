@@ -1,0 +1,10 @@
+extends ../layout
+block content
+
+    h3= "Date de réservation : " + reservation.dateReservation
+    hr
+    if user
+        if user.id ==reservation.userId
+    a.btn.btn-default(href='/reservations/edit/'+reservation._id) Edit
+    a.btn.btn-danger.delete-reservation(href='#',data-id=reservation._id) Delete
+

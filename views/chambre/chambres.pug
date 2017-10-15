@@ -1,8 +1,0 @@
-extends ../layout
-block content
-
-    h1 #{title}
-    ul.list-group
-        each chambre, i in chambres
-            li.list-group-item
-                a(href="/chambres/" + chambre._id)= chambre.metre

@@ -16,7 +16,7 @@ var app = express();
 
 // Declaration Models
 var Article = require('./models/article');
-var Chambre = require('./models/chambre');
+var Reservation = require('./models/reservation');
 
 // Pour charger toutes les 'vues.pug' dans le dossier 'views'
 app.set('views',path.join(__dirname, 'views'));
@@ -96,7 +96,7 @@ Article.find({}, function(err, articles){
 /*------------Declaration Routes Avec Path definit une fois-------------------*/
 app.use('/users', require('./routes/users'));
 app.use('/articles', require('./routes/articles'));
-app.use('/chambres', require('./routes/chambres'));
+app.use('/reservations', require('./routes/reservation'));
 
 
 

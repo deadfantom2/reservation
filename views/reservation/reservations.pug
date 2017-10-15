@@ -1,0 +1,8 @@
+extends ../layout
+block content
+
+    h1 #{title}
+    ul.list-group
+        each reservation, i in reservations
+            li.list-group-item
+                a(href="/reservations/"+reservation._id)= reservation.dateReservation

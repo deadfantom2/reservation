@@ -1,0 +1,28 @@
+extends ../layout
+block content
+
+    h1 #{title}
+    form(method='POST',action='/reservations/add')
+      #form-group
+        label Etage:
+        input.form-control(name='etage',type='text')
+        br
+      #form-group
+        label Type:
+        select(name='type')
+          option(value='Familiale') Familiale
+          option(value='Luxe') Luxe
+      br
+      #form-group
+        label Nombre chambre:
+        input.form-control(name='nbRoom',type='text')
+        br
+      #form-group
+        label Date de réservation:
+        input.form-control(name='dateReservation',type='date')
+
+      br
+      input.btn.btn-primary(type='submit',value='Submit')
+
+
+          

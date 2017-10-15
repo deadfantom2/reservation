@@ -7,6 +7,13 @@ var nodemailer  = require('nodemailer');
 // Declaration Model User
 var User = require('../models/user');
 
+/* *************************************************Chat************************************************************* */
+// Chat GET
+router.get('/chat', ensureAuthenticated, function(req, res){
+    res.render('chat');
+});
+
+
 
 /* ***********************************************Profile************************************************************ */
 // Profile GET

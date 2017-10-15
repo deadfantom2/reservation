@@ -4,6 +4,7 @@ html
     title Knowledgebase
     link(rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css")
     link(rel="stylesheet" href="/css/style.css")
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js')
   body
     
     nav.navbar.navbar-inverse
@@ -26,6 +27,8 @@ html
                   a(href='/reservations') Voir reservations
           ul.nav.navbar-nav.navbar-right
             if user
+              li
+                a(href='/users/chat') Chat
               li
                 a(href='/users/profile/'+ user._id) Profile
               li
